@@ -32,3 +32,15 @@ We adjust them so the model can "draw its own map." By allowing the embedding ve
 ### **8. What are "Logits" and "Argmax"?**
 - **Logits**: The raw, unrefined scores that come out of the dot-product math.
 - **Argmax**: A function that looks at those scores and returns the **Index** of the highest one. It turns "Probability Math" into a "Final Decision."
+
+### **9. What is a "Layer" in this context?**
+A layer is simply a **Weight Matrix** that sits between the Input and the Output. 
+- In our simple model, we added a **Hidden Layer**.
+- Instead of going straight from Word $\rightarrow$ Score, the computer now goes: Word $\rightarrow$ **Abstract Concepts** $\rightarrow$ Score.
+- Each layer allows the model to "think" in more complex steps (e.g., Layer 1 understands grammar, Layer 2 understands sentiment, Layer 3 understands logic).
+
+### **10. Why do we need the `ReLU` function (Activation Function)?**
+If you just multiply 10 matrices together, mathematically it's the exact same as multiplying by 1 big matrix. To actually get the benefit of multiple layers, you need a "Non-Linear" step. 
+- **ReLU (Rectified Linear Unit)** is the most common. It basically says: *"If the number is negative, turn it to 0. If it's positive, keep it."*
+- This "filtering" allows the model to ignore some features and focus on others, making it much smarter than a simple linear calculator.
+
