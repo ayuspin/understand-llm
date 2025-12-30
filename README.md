@@ -25,7 +25,10 @@ A functional mini-LLM implementation containing:
 An educational script designed to clarify the orientation and mechanics of matrix multiplication. It bridges the gap between textbook math ($Wx$) and real-world AI code standard ($xW$), providing visual ASCII diagrams of the "Row-by-Column" process.
 
 ### 4. [FAQ.md](FAQ.md)
-A comprehensive technical reference capturing 16 key questions and answers from the exploration process. This document covers topics from basic dot products to low-rank factorization and feature hierarchies.
+A comprehensive technical reference capturing 16 key questions and answers from the exploration process.
+
+### 5. [roadmap.md](roadmap.md)
+The path forward. Outlines the transition from basic math to sequential context and the **Attention Mechanism**.
 
 ## Getting Started
 
