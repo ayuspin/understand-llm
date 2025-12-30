@@ -101,4 +101,11 @@ print("--- STEP 4: NUMPY (The Professional Standard) ---")
 print(f"Input Matrix Shape: {w_np.shape} (3 rows, 2 columns)")
 print(f"Input Vector Shape: {x_np.shape} (size 2)")
 print(f"Numpy result of W @ X: {numpy_result}")
+
+# Let's also do Step 5 (the Logits) with NumPy
+hidden_np = np.array(hidden_output)
+output_w_np = np.array(output_matrix)
+numpy_logits = output_w_np @ hidden_np
+
+print(f"\nExample 2 (Logits from Step 5 with NumPy):\n {numpy_logits}")
 print("\nNumPy handles the 'bending' of row-to-column automatically!")
