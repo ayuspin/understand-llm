@@ -43,4 +43,10 @@ A layer is simply a **Weight Matrix** that sits between the Input and the Output
 If you just multiply 10 matrices together, mathematically it's the exact same as multiplying by 1 big matrix. To actually get the benefit of multiple layers, you need a "Non-Linear" step. 
 - **ReLU (Rectified Linear Unit)** is the most common. It basically says: *"If the number is negative, turn it to 0. If it's positive, keep it."*
 - This "filtering" allows the model to ignore some features and focus on others, making it much smarter than a simple linear calculator.
+### **11. Is the goal just about finding a value $y$ for a given $x$?**
+Exactly. In mathematics, this is called **General Function Approximation**. 
+- **The Input ($x$)**: In an LLM, this is the context (e.g., the word "The").
+- **The Output ($y$)**: This is the prediction (e.g., the word "cat").
+- **The Process**: We are looking for a massive, multi-dimensional function $f$ such that $f(x) = y$. 
+Because language is incredibly complex and non-linear, we cannot write this function by hand. Instead, we use billions of tiny numbers (Weights) and non-linear steps (ReLU) so that the computer can "learn" the shape of the function through trial and error.
 

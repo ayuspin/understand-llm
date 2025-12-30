@@ -13,23 +13,20 @@ vector_size = 4  # The 'Embedding Dimension' (Hyperparameter)
 print(f"Vocabulary: {vocab}")
 
 # 2. MODEL INITIALIZATION (Parameters)
-# Embeddings: A look-up table (Matrix) for word representations.
 embeddings = np.random.randn(vocab_size, vector_size) 
 
-# --- NEW: THE HIDDEN LAYER ---
-# This layer allows the model to combine features in complex ways.
-# Shape: (Vector Size x Hidden Units)
-hidden_size = 8
-hidden_weights = np.random.randn(vector_size, hidden_size)
+# HIDDEN LAYER 1
+h1_size = 8
+w_h1 = np.random.randn(vector_size, h1_size)
 
-# Output Weights: Final prediction layer.
-# Shape: (Hidden Units x Vocabulary Size)
-output_weights = np.random.randn(hidden_size, vocab_size)
+# HIDDEN LAYER 2
+h2_size = 8
+w_h2 = np.random.randn(h1_size, h2_size)
+
+# OUTPUT LAYER
+w_out = np.random.randn(h2_size, vocab_size)
 
 def relu(x):
-    """ACTVATION FUNCTION: The 'Non-Linearity'. 
-    Without this, 100 layers would mathematically collapse into 1 layer.
-    """
     return np.maximum(0, x)
 
 # 3. FORWARD PASS (Inference)
@@ -39,42 +36,45 @@ input_id = word_to_id[input_word]
 # Step A: EMBEDDING LOOKUP
 vector = embeddings[input_id]  
 
-# Step B: HIDDEN LAYER + ACTIVATION
-# Here, we transform the word vector into 'Hidden Features'
-hidden_output = relu(np.dot(vector, hidden_weights))
+# Step B: LAYER 1 + ACTIVATION
+h1_output = relu(np.dot(vector, w_h1))
 
-# Step C: OUTPUT LAYER (Logits)
-logits = np.dot(hidden_output, output_weights)
+# Step C: LAYER 2 + ACTIVATION
+h2_output = relu(np.dot(h1_output, w_h2))
 
-# Step D: ARGMAX
+# Step D: OUTPUT LAYER (Logits)
+logits = np.dot(h2_output, w_out)
 predicted_id = np.argmax(logits)
 
 print(f"\nInput: '{input_word}'")
 print(f"Predicted next word: '{id_to_word[predicted_id]}'")
 
-# 4. TRAINING / BACKPROPAGATION (Simplistic Gradient Descent)
+# 4. TRAINING / BACKPROPAGATION (Manual Gradient Descent)
 target_word = "cat"
 target_id = word_to_id[target_word]
 print(f"Actual next word: '{target_word}'")
 
 learning_rate = 0.1
 if predicted_id != target_id:
-    # UPDATING ALL LAYERS (Nudging everything)
+    # We nudge every layer that contributed to the final result.
     # Output Layer Update
-    output_weights[:, target_id] += learning_rate * hidden_output
+    w_out[:, target_id] += learning_rate * h2_output
     
-    # Hidden Layer Update
-    # (We nudge the weights that contributed to the correct output)
-    hidden_weights += learning_rate * np.outer(vector, (output_weights[:, target_id] > 0))
+    # Layer 2 Update (Nudge based on correctly identified 'cat' indicators)
+    w_h2 += learning_rate * np.outer(h1_output, (w_out[:, target_id] > 0))
+    
+    # Layer 1 Update
+    w_h1 += learning_rate * np.outer(vector, (np.dot(w_h2, (w_out[:, target_id] > 0)) > 0))
     
     # Embedding Update
-    embeddings[input_id] += learning_rate * np.dot(hidden_weights, output_weights[:, target_id])
+    embeddings[input_id] += learning_rate * np.dot(w_h1, np.dot(w_h2, w_out[:, target_id]))
     
-    print("\n[Optimizer Update] Adjusted Embeddings, Hidden Layer, and Output Weights.")
+    print("\n[Optimizer Update] Adjusted Embeddings and ALL 3 Weight Matrices.")
 
 # 5. VALIDATION
 new_vector = embeddings[input_id]
-new_hidden = relu(np.dot(new_vector, hidden_weights))
-new_logits = np.dot(new_hidden, output_weights)
+new_h1 = relu(np.dot(new_vector, w_h1))
+new_h2 = relu(np.dot(new_h1, w_h2))
+new_logits = np.dot(new_h2, w_out)
 new_predicted_id = np.argmax(new_logits)
 print(f"New prediction after update: '{id_to_word[new_predicted_id]}'")
