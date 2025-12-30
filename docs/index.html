@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understand LLM - Interactive Tutorial</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="split-view">
+            <!-- Left Panel: Explanation -->
+            <div class="panel left-panel">
+                <h1 id="step-title">Loading...</h1>
+                <div id="step-explanation" class="explanation"></div>
+            </div>
+
+            <!-- Right Panel: Code Editor -->
+            <div class="panel right-panel">
+                <div class="editor-header">
+                    <span class="file-name">playground.py</span>
+                    <button id="run-btn" class="btn run-btn" disabled>▶ Run</button>
+                </div>
+                <textarea id="code-editor" spellcheck="false"></textarea>
+                <div class="output-section">
+                    <div class="output-header">Output</div>
+                    <pre id="output"></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button id="prev-btn" class="btn nav-btn">← Previous</button>
+            <span id="step-counter">Step 1 of 3</span>
+            <button id="next-btn" class="btn nav-btn">Next →</button>
+        </div>
+    </div>
+
+    <script src="steps.js"></script>
+    <script src="tutorial.js"></script>
+</body>
+</html>
