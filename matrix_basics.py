@@ -110,5 +110,12 @@ print(f"v_np: {v_np}")
 numpy_result = w_np @ v_np
 
 print("--- STEP 4: THE PROFESSIONAL WAY (NumPy) ---")
-print(f"Result using '@' operator: {numpy_result}")
+print(f"Example 1 (Matrix * Vector):\n {numpy_result}")
+
+# Let's also do Step 5 (the Logits) with NumPy
+hidden_np = np.array(hidden_output)
+output_w_np = np.array(output_weights)
+numpy_logits = output_w_np @ hidden_np
+
+print(f"\nExample 2 (Logits from Step 5):\n {numpy_logits}")
 print("It's identical to our manual loop, just much faster!")
