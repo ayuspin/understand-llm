@@ -83,9 +83,10 @@ print(f"Output Matrix (2 words):\n {output_weights[0]} ('the')\n {output_weights
 
 for i, word in enumerate(["the", "cat"]):
     w_vector = output_weights[i]
-    # Dot product: sum of (h[i] * w[i])
+    # Dot product: show the individual multiplications and their sum
+    calculation_steps = " + ".join([f"({h} * {w})" for h, w in zip(hidden_output, w_vector)])
     score = sum(h * w for h, w in zip(hidden_output, w_vector))
-    print(f" Score for '{word}': {score:.2f}")
+    print(f" Score for '{word}': {calculation_steps} = {score:.2f}")
 
 print("\nThe word with the highest score is our prediction (Argmax).")
 print("-" * 30 + "\n")
@@ -102,9 +103,6 @@ import numpy as np
 # Convert our lists to 'NumPy Arrays'
 w_np = np.array(matrix_w)
 v_np = np.array(input_v)
-
-print(f"w_np: {w_np}")
-print(f"v_np: {v_np}")
 
 # The '@' symbol in Python means "Matrix Multiply"
 numpy_result = w_np @ v_np
