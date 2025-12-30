@@ -44,6 +44,9 @@ h2_output = relu(np.dot(h1_output, w_h2))
 
 # Step D: OUTPUT LAYER (Logits)
 logits = np.dot(h2_output, w_out)
+print(f"Last hidden layer output: {h2_output}")
+print(f"Output layer weights: {w_out}")
+print(f"Logits from forward pass: {logits}")
 predicted_id = np.argmax(logits)
 
 print(f"\nInput: '{input_word}'")
