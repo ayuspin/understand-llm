@@ -90,6 +90,23 @@ async function loadStep(index) {
     // Update progress bar
     const progress = ((index + 1) / STEPS.length) * 100;
     progressBar.style.width = `${progress}%`;
+
+    // Render step navigation links
+    renderStepNav();
+}
+
+// Render Step Navigation
+function renderStepNav() {
+    const navEl = document.getElementById('step-nav');
+    navEl.innerHTML = '<div class="step-nav-title">All Steps</div>';
+
+    STEPS.forEach((step, i) => {
+        const link = document.createElement('div');
+        link.className = 'step-link' + (i === currentStep ? ' active' : '');
+        link.textContent = step.title;
+        link.onclick = () => loadStep(i);
+        navEl.appendChild(link);
+    });
 }
 
 // Event Listeners
