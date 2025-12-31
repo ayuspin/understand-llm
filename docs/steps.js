@@ -45,7 +45,7 @@ const STEPS = [
     },
     {
         title: "Step 4: Softmax (Probability)",
-        script: "scripts/softmax_basics.py",
+        script: "scripts/step4_softmax.py",
         explanation: `
             <p>Raw scores (Logits) are hard to compare. <strong>Softmax</strong> turns them into percentages.</p>
             <p>The 3-step recipe:</p>

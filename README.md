@@ -7,31 +7,33 @@ A foundational exploration of Large Language Models (LLMs), breaking down the bl
 
 ## Project Goal
 The goal of this project is to understand the fundamental building blocks of neural networks and language models:
-- How text is converted into numbers (Vectorization/Embeddings).
-- How "learning" works via dot products and weight matrices.
-- Why non-linearity (ReLU) and multi-layer hierarchies are necessary.
-- The mechanical reality of matrix multiplication in modern AI.
+- How text is converted into numbers ([Embeddings](docs/scripts/step3_ai_orientation.py)).
+- How neural network [Layers](text_to_model.py) work.
+- Why [ReLU](text_to_model.py) is necessary.
+- [Matrix Multiplication](docs/scripts/step2_matrix_multiply.py) in AI code.
+- [Softmax](docs/scripts/step4_softmax.py) and Probability.
 
 ## Project Structure
 
-### 1. [digit_basics.py](digit_basics.py)
-A starting point demonstrating the concept of **Template Matching**. It shows that "recognizing" a digit is essentially just calculating the similarity (dot product) between an input and a set of learned patterns.
-
-### 2. [text_to_model.py](text_to_model.py)
-A functional mini-LLM implementation containing:
+### 1. [text_to_model.py](text_to_model.py)
+The main codebase demonstrating a functional mini-LLM with:
 - **Tokenizer**: Mapping words to IDs.
 - **Embeddings**: Multi-dimensional word representations.
 - **Forward Pass**: Multi-layer processing with ReLU activation.
-- **Manual Backpropagation**: A step-by-step demonstration of how errors are used to update model weights.
+- **Manual Backpropagation**: A step-by-step demonstration of training.
 
-### 3. [matrix_basics.py](matrix_basics.py)
-An educational script designed to clarify the orientation and mechanics of matrix multiplication. It bridges the gap between textbook math ($Wx$) and real-world AI code standard ($xW$), providing visual ASCII diagrams of the "Row-by-Column" process.
+### 2. [Tutorial Scripts](docs/scripts/)
+A collection of bite-sized Python scripts that power the interactive tutorial:
+- `step1_dot_product.py`: Understanding similarity.
+- `step2_matrix_multiply.py`: The "Row-by-Column" rule.
+- `step3_ai_orientation.py`: How LLMs use $xW$ orientation.
+- `step4_softmax.py`: Turning scores into probabilities.
 
-### 4. [FAQ.md](FAQ.md)
-A comprehensive technical reference capturing 16 key questions and answers from the exploration process.
+### 3. [FAQ.md](FAQ.md)
+A comprehensive technical reference capturing key concepts and terminology.
 
-### 5. [roadmap.md](roadmap.md)
-The path forward. Outlines the transition from basic math to sequential context and the **Attention Mechanism**.
+### 4. [roadmap.md](roadmap.md)
+The path forward to context windows, Attention, and Transformers.
 
 ## Getting Started
 
@@ -50,12 +52,11 @@ pip install numpy
 ```
 
 ### Running the Scripts
-Each script is self-contained and provides printed explanations in the terminal:
+The main model can be run directly:
 ```bash
-python3 digit_basics.py
 python3 text_to_model.py
-python3 matrix_basics.py
 ```
+Tutorial scripts can be found in `docs/scripts/` and are also accessible via the [Live Tutorial](https://ayuspin.github.io/understand-llm/).
 
 ## License
 MIT License - see the [LICENSE](LICENSE) file for details.
