@@ -8,12 +8,10 @@ This roadmap outlines the journey from understanding basic matrix math to the co
 - [x] **Non-Linearity (ReLU)**: Why deep networks need mathematical "filters" to learn complex logic.
 - [x] **Universal Function Approximation**: The theory that any complex logic can be represented as math.
 
-## Phase 2: Sequential Understanding & Probability (Next 🚀)
-- [x] **Softmax**: Turning raw scores (Logits) into clean probabilities (The "Goal Post").
-- [ ] **Moving beyond "One Word at a Time"**: How to feed the model multiple words at once.
-- [ ] **Context Windows**: The memory of the model.
-- [ ] **Positional Encoding: Basic Concept**: "Stamping" time into word vectors via addition.
-- [ ] **Positional Encoding: The Math**: Sinusoidal vs. Learned embeddings.
+## Phase 2: Sequential & Positional Math (Next 🚀)
+- [x] **Softmax**: Turning raw scores into clean probabilities.
+- [x] **Positional Encoding: Basic Concept**: "Stamping" time into word vectors via addition.
+- [ ] **Positional Encoding: The Math**: Sinusoidal (Clocks) vs. Learned embeddings.
 
 ## Phase 3: The Attention Mechanism 🧠
 - [ ] **Self-Attention**: The "Big Breakthrough." How words in a sentence "pay attention" to each other.
