@@ -26,6 +26,17 @@ async function initPyodide() {
     }
 }
 
+// Fetch Python code from file
+async function fetchCode(scriptPath) {
+    try {
+        const response = await fetch(scriptPath);
+        if (!response.ok) throw new Error(`Failed to load ${scriptPath}`);
+        return await response.text();
+    } catch (error) {
+        return `# Error loading script: ${error.message}`;
+    }
+}
+
 // Run Python Code
 async function runCode() {
     if (!pyodide) return;
@@ -55,7 +66,7 @@ sys.stdout = StringIO()
 }
 
 // Load Step
-function loadStep(index) {
+async function loadStep(index) {
     if (index < 0 || index >= STEPS.length) return;
 
     currentStep = index;
@@ -63,7 +74,12 @@ function loadStep(index) {
 
     titleEl.textContent = step.title;
     explanationEl.innerHTML = step.explanation;
-    codeEditor.value = step.code;
+
+    // Fetch the Python code from the script file
+    codeEditor.value = '# Loading...';
+    const code = await fetchCode(step.script);
+    codeEditor.value = code;
+
     outputEl.textContent = '👆 Click "Run" to execute this code';
 
     // Update navigation
