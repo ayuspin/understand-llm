@@ -88,3 +88,10 @@ The process has three steps:
 
 This is essential because models need a standardized way to compare outputs and decide which word is most likely. It also enables "Temperature" settings and allows the model to distribute "Attention" across multiple words.
 
+
+### **18. Why is Positional Encoding a vector and not just a single number?**
+
+There are three main reasons:
+1.  **Signal-to-Noise:** Adding a single number (like '1') to one feature is easy for the model to lose or confuse with other features. A vector spreads the "watermark" across the entire word, making it more robust.
+2.  **Scale:** If you use huge numbers like 1, 2, ..., 500, they will overwhelm the small decimal values of the word vectors. A vector allows us to keep the values small while still being unique.
+3.  **Dimensional Independence:** In high-dimensional space, the model can learn to use specific "lanes" of the vector for meaning and others for position without them interfering with each other.

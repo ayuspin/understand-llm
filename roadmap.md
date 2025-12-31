@@ -12,7 +12,8 @@ This roadmap outlines the journey from understanding basic matrix math to the co
 - [x] **Softmax**: Turning raw scores (Logits) into clean probabilities (The "Goal Post").
 - [ ] **Moving beyond "One Word at a Time"**: How to feed the model multiple words at once.
 - [ ] **Context Windows**: The memory of the model.
-- [ ] **Positional Encoding**: How the model knows the difference between "The cat ate the dog" and "The dog ate the cat."
+- [ ] **Positional Encoding: Basic Concept**: "Stamping" time into word vectors via addition.
+- [ ] **Positional Encoding: The Math**: Sinusoidal vs. Learned embeddings.
 
 ## Phase 3: The Attention Mechanism 🧠
 - [ ] **Self-Attention**: The "Big Breakthrough." How words in a sentence "pay attention" to each other.

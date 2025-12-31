@@ -56,5 +56,19 @@ const STEPS = [
             </ol>
             <p>The result is a neat "Probability Budget" that adds up to exactly 1.0 (100%).</p>
         `
+    },
+    {
+        title: "Step 5: Positional Encoding (Basics)",
+        script: "scripts/step5_pos_encoding.py",
+        explanation: `
+            <p>If you process all words at the same time, the model doesn't know their order. It's "Position Blind."</p>
+            <p><strong>Positional Encoding</strong> is a trick to fix this: we <strong>add</strong> a unique vector of numbers to each word vector.</p>
+            <p>This "colors" the word with its location:</p>
+            <ul style="margin: 16px 0; padding-left: 20px; color: var(--text-secondary);">
+                <li><strong>Meaning</strong>: The original word vector.</li>
+                <li><strong>Position</strong>: A unique "watermark" vector for that index.</li>
+            </ul>
+            <p>By adding them together, the word now carries both <strong>what</strong> it is and <strong>where</strong> it is in a single package.</p>
+        `
     }
 ];
