@@ -2,6 +2,9 @@
 
 A foundational exploration of Large Language Models (LLMs), breaking down the black box into pure mathematics and code without the use of confusing analogies.
 
+**🚀 [Live Interactive Tutorial](https://ayuspin.github.io/understand-llm/)**
+
+
 ## Project Goal
 The goal of this project is to understand the fundamental building blocks of neural networks and language models:
 - How text is converted into numbers (Vectorization/Embeddings).
