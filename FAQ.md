@@ -76,3 +76,15 @@ However, in modern AI code (like NumPy and PyTorch), we often use **$y = xW$** (
 - **Why?** It is more natural for computers to process a "stream" of data as a row.
 - **The Result**: In this orientation, each **Column** of the weight matrix represents a single "word" or "concept."
 - **The Rule**: Whether it's $Wx$ or $xW$, the core rule is the same: the dimensions must "touch" (e.g., a Row of 8 must meet a Matrix with 8 heights).
+
+### **17. What is Softmax, and why do we need it?**
+
+Softmax is a mathematical function that converts "Logits" (raw, messy scores) into a "Probability Distribution" (clean percentages that add up to 100%).
+
+The process has three steps:
+1.  **Exponentiation ($e^x$):** Raise $e$ (2.718...) to the power of each score. This ensures every result is positive and makes large scores significantly larger than small ones.
+2.  **Summing:** Add up all the exponentiated values to find the "total budget."
+3.  **Normalizing:** Divide each individual value by the total budget.
+
+This is essential because models need a standardized way to compare outputs and decide which word is most likely. It also enables "Temperature" settings and allows the model to distribute "Attention" across multiple words.
+

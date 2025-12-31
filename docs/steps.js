@@ -97,5 +97,38 @@ print(f"\\nWord scores:")
 print(f"  'the': {scores[0]:.2f}")
 print(f"  'cat': {scores[1]:.2f}")
 print(f"\\nPrediction: '{'the' if scores[0] > scores[1] else 'cat'}'")`
+    },
+    {
+        title: "Step 4: Softmax (Probability)",
+        explanation: `
+            <p>Raw scores (Logits) are hard to compare. <strong>Softmax</strong> turns them into percentages.</p>
+            <p>The 3-step recipe:</p>
+            <ol style="margin: 16px 0; padding-left: 20px; color: var(--text-secondary);">
+                <li><strong>Exponentiate (e^x)</strong>: Makes everything positive and amplifies the winner.</li>
+                <li><strong>Sum</strong>: Total up all the scores.</li>
+                <li><strong>Normalize</strong>: Divide each score by the total.</li>
+            </ol>
+            <p>The result is a neat "Probability Budget" that adds up to exactly 1.0 (100%).</p>
+        `,
+        code: `import numpy as np
+
+# Raw scores from a model
+logits = np.array([5.2, -1.2, 0.4])
+
+# 1. Exponentiate
+exps = np.exp(logits)
+
+# 2. Sum
+total = np.sum(exps)
+
+# 3. Normalize
+probs = exps / total
+
+words = ["the", "cat", "dog"]
+print("Word Scores (Softmax):")
+for i, word in enumerate(words):
+    print(f"  '{word}': {probs[i]*100:.2f}%")
+
+print(f"\\nTotal Budget: {np.sum(probs):.1f}")`
     }
 ];
