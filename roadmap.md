@@ -11,7 +11,7 @@ This roadmap outlines the journey from understanding basic matrix math to the co
 ## Phase 2: Sequential & Positional Math (Next 🚀)
 - [x] **Softmax**: Turning raw scores into clean probabilities.
 - [x] **Positional Encoding: Basic Concept**: "Stamping" time into word vectors via addition.
-- [ ] **Positional Encoding: The Math**: Sinusoidal (Clocks) vs. Learned embeddings.
+- [ ] **RoPE Math (Rotary Positional Embedding)**: The modern standard. Rotating vector pairs like clock hands.
 
 ## Phase 3: The Attention Mechanism 🧠
 - [ ] **Self-Attention**: The "Big Breakthrough." How words in a sentence "pay attention" to each other.

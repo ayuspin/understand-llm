@@ -70,5 +70,19 @@ const STEPS = [
             </ul>
             <p>By adding them together, the word now carries both <strong>what</strong> it is and <strong>where</strong> it is in a single package.</p>
         `
+    },
+    {
+        title: "Step 6: RoPE (Modern Rotation)",
+        script: "scripts/step6_rope_math.py",
+        explanation: `
+            <p>Modern LLMs (Llama, Mistral) use <strong>RoPE</strong> (Rotary Positional Embedding) instead of simple addition.</p>
+            <p>Instead of <em>adding</em> a vector, we treat word vectors as pairs of points on a 2D graph and <strong>rotate</strong> them.</p>
+            <ul style="margin: 16px 0; padding-left: 20px; color: var(--text-secondary);">
+                <li><strong>The Logic</strong>: Position determine the angle of rotation.</li>
+                <li><strong>The Clock Handle</strong>: Each pair rotates at a different speed (frequency).</li>
+                <li><strong>Relative Distance</strong>: Because rotation is consistent, the "angle" between words stays the same even if the sentence is shifted.</li>
+            </ul>
+            <p><strong>Run the code</strong> to see how the 'cat' vector pairs point in different directions at each position.</p>
+        `
     }
 ];

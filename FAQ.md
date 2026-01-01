@@ -95,3 +95,15 @@ There are three main reasons:
 1.  **Signal-to-Noise:** Adding a single number (like '1') to one feature is easy for the model to lose or confuse with other features. A vector spreads the "watermark" across the entire word, making it more robust.
 2.  **Scale:** If you use huge numbers like 1, 2, ..., 500, they will overwhelm the small decimal values of the word vectors. A vector allows us to keep the values small while still being unique.
 3.  **Dimensional Independence:** In high-dimensional space, the model can learn to use specific "lanes" of the vector for meaning and others for position without them interfering with each other.
+
+### **19. What is RoPE (Rotary Positional Embedding), and why is it the modern standard?**
+
+RoPE is the method used by models like Llama 3 and GPT-NeoX to handle position. Instead of adding a position vector to the word vector, RoPE **rotates** the vector in mathematical space.
+
+**How it works:**
+The word vector is split into pairs (like $x, y$ coordinates). For a word at position $m$, each pair is rotated by an angle $\theta$. 
+
+**Why it's better:**
+1.  **Relative Distance:** Rotation naturally preserves the distance between words. The "angle" between two words is identical whether they are at indices 1 and 2 or indices 1001 and 1002.
+2.  **No Boundary:** Because it’s a mathematical formula (Sines/Cosines), the model can potentially handle sequences longer than those it was trained on (Extrapolation).
+3.  **Stability:** Rotation doesn't change the "norm" (energy) of the word vector, keeping the math stable through deep layers.
