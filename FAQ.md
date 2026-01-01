@@ -112,4 +112,11 @@ The word vector is split into pairs (like $x, y$ coordinates). For a word at pos
 In a real LLM with 12,000+ features, we don't calculate thousands of rotations one-by-one in a loop. Instead:
 - **Pre-computed Matrices:** The model pre-calculates a massive matrix of Sine and Cosine values for every possible position.
 - **Vectorized Math:** Using GPUs, the model applies all rotations across the entire vector in a single parallel operation: `New_Vector = (Old_Vector * Cos) + (Swapped_Vector * Sin)`.
-- **Frequency Spectrum:** Not all pairs rotates at the same speed. Some rotate fast to capture local order, while others rotate slowly to capture long-range relationships.
+- **Frequency Spectrum:** Not all pairs rotate at the same speed. We use a **decaying exponential formula** (usually $\theta_i = 10000^{-2i/d}$) so that:
+    - The first pairs rotate **fast** (capturing local order).
+    - The last pairs rotate **extremely slowly** (capturing long-range structure).
+
+**What happens if a vector turns 360 degrees?**
+If we only had one pair, the model would eventually see the same orientation twice (Aliasing), making it impossible to tell Word #1 from Word #7. 
+
+RoPE solves this by having **thousands of pairs** (hands) all rotating at different speeds. Like a **combination lock** with multiple dials, the unique combination of all 6,000+ dial positions will not repeat for trillions of tokens. Even if the "seconds hand" (fast pair) wraps around, the "hour hand" (slow pair) has only moved a fraction of a degree, keeping the absolute position unique.
