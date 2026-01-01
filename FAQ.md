@@ -107,3 +107,9 @@ The word vector is split into pairs (like $x, y$ coordinates). For a word at pos
 1.  **Relative Distance:** Rotation naturally preserves the distance between words. The "angle" between two words is identical whether they are at indices 1 and 2 or indices 1001 and 1002.
 2.  **No Boundary:** Because it’s a mathematical formula (Sines/Cosines), the model can potentially handle sequences longer than those it was trained on (Extrapolation).
 3.  **Stability:** Rotation doesn't change the "norm" (energy) of the word vector, keeping the math stable through deep layers.
+
+**How is it implemented efficiently?**
+In a real LLM with 12,000+ features, we don't calculate thousands of rotations one-by-one in a loop. Instead:
+- **Pre-computed Matrices:** The model pre-calculates a massive matrix of Sine and Cosine values for every possible position.
+- **Vectorized Math:** Using GPUs, the model applies all rotations across the entire vector in a single parallel operation: `New_Vector = (Old_Vector * Cos) + (Swapped_Vector * Sin)`.
+- **Frequency Spectrum:** Not all pairs rotates at the same speed. Some rotate fast to capture local order, while others rotate slowly to capture long-range relationships.
