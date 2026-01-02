@@ -120,3 +120,10 @@ In a real LLM with 12,000+ features, we don't calculate thousands of rotations o
 If we only had one pair, the model would eventually see the same orientation twice (Aliasing), making it impossible to tell Word #1 from Word #7. 
 
 RoPE solves this by having **thousands of pairs** (hands) all rotating at different speeds. Like a **combination lock** with multiple dials, the unique combination of all 6,000+ dial positions will not repeat for trillions of tokens. Even if the "seconds hand" (fast pair) wraps around, the "hour hand" (slow pair) has only moved a fraction of a degree, keeping the absolute position unique.
+
+### **20. Why do we divide the Attention scores by $\sqrt{d}$ (Scaling Factor)?**
+
+In high-dimensional space (large $), the Dot Product of two vectors can result in very large numbers. When these large numbers are fed into the **Softmax** function, it causes the function to "saturate." 
+
+Saturation means that one value becomes nearly 1.0 and all others become nearly 0. When this happens, the gradient (the information the model uses to learn) becomes near-zero, and the model stops being able to train effectively. Dividing by $\sqrt{d}$ keeps the values in a range where the Softmax function is still "sensitive" and able to distribute attention across multiple words.
+

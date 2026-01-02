@@ -84,5 +84,19 @@ const STEPS = [
             </ul>
             <p><strong>Run the code</strong> to see how the 'cat' vector pairs point in different directions at each position.</p>
         `
+    },
+    {
+        title: "Step 7: Scaled Dot-Product Attention",
+        script: "scripts/step7_attention_math.py",
+        explanation: `
+            <p>This is the "Heart" of the Transformer. Instead of fixed weights, Attention builds a custom weight matrix for every sentence.</p>
+            <p>The 3-Step Process:</p>
+            <ol style="margin: 16px 0; padding-left: 20px; color: var(--text-secondary);">
+                <li><strong>Dot-Product ($QK^T$)</strong>: Every word's <strong>Query</strong> (Search) is compared against every word's <strong>Key</strong> (Index).</li>
+                <li><strong>Scaling ($\sqrt{d}$)</strong>: Divide scores by the square root of the dimension. This keeps the math stable so Softmax doesn't "freeze."</li>
+                <li><strong>Softmax & Value</strong>: Turn scores into percentages and use them to blend the <strong>Values</strong> (Actual Data).</li>
+            </ol>
+            <p><strong>Run the code</strong> to see how the word "sat" calculates that it should pay 85% of its attention to "cat".</p>
+        `
     }
 ];
