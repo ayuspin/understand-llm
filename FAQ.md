@@ -148,3 +148,26 @@ If we only had one Attention mechanism, the model would have to pick the "strong
 - **Specialization**: Each head can learn to look for one specific thing (e.g., "Head 1 looks for grammatical subjects," "Head 8 looks for punctuation," "Head 12 looks for emotional context").
 - **Resolution**: Like having multiple cameras recording a scene from different angles, Multi-Head Attention allows the model to "see" overlapping patterns in the data simultaneously, resulting in a much richer context vector.
 
+### **23. What are Residual Connections, and why are they called "Highways"?**
+
+As neural networks get deeper (more layers), it becomes harder for information from the beginning to reach the end, and harder for gradients to flow backward during training (the Vanishing Gradient problem).
+
+**Residual Connections** (or Skip Connections) solve this by literally adding the input of a layer to its output: `Output = Layer(x) + x`.
+
+- **Stability**: It ensures that if a layer doesn't learn anything useful yet (is just random noise), the original data can still pass through unaffected.
+- **Gradient Flow**: It creates a direct "highway" for the mathematical signal to travel through the network without being warped or lost in the matrix multiplications.
+
+### **24. What is the difference between Parallel Training and Sequential Inference?**
+
+This is the most confusing part of LLMs:
+- **In Training**: We use **Causal Masking** to process the entire sentence at once (Parallel). We calculate the loss for every word in the sequence simultaneously on the GPU.
+- **In Inference (Chatting)**: The model is **Auto-regressive**. It predicts one word, adds it to the input, and then runs the whole model again to predict the next word (Sequential). Masking isn't strictly needed here because the future words literally don't exist in the input yet!
+
+### **25. What is Layer Normalization, and why is it a "Brake" for the math?**
+
+As data flows through a deep Transformer, the constant matrix multiplications can cause numerical values to spiral out of control (the values might become 100,000 or -50,000). This instability breaks the training process.
+
+**Layer Normalization** acts as a stabilizer by "re-centering" the data after every major step:
+- **Mean (The Center)**: The average value of all features in a vector. We subtract the mean to ensure the vector is centered at zero.
+- **Variance (The Spread)**: A measure of how much the values differ from the mean. We divide by the square root of the variance to ensure the "volume" of the signal is consistent (Standard Deviation = 1).
+- **Learnable Recovery**: It uses two parameters—**Gamma** (a multiplier) and **Beta** (a shift)—which allow the model to learn the optimal "volume" for each feature while keeping the overall math stable.

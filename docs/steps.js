@@ -111,5 +111,18 @@ const STEPS = [
             </ul>
             <p><strong>Run the code</strong> to see how <strong>Head 1</strong> and <strong>Head 2</strong> use their unique weight matrices to focus on completely different parts of the sentence!</p>
         `
+    },
+    {
+        title: "Step 9: Layer Normalization (The Stabilizer)",
+        script: "scripts/step9_layer_norm.py",
+        explanation: `
+            <p>Deep networks have a problem: as numbers travel through many layers, they can become <strong>explosively large</strong> or <strong>microscopically small</strong>. This makes training impossible.</p>
+            <ul style="margin: 16px 0; padding-left: 20px; color: var(--text-secondary);">
+                <li><strong>The Mean (The Center)</strong>: We find the average value of all features in a word. If the output is shifted too far positive or negative, we pull it back to 0.</li>
+                <li><strong>The Variance (The Spread)</strong>: we measure how much the values "pop" or "scatter." We scale them so the spread is always 1, preventing numerical explosions.</li>
+                <li><strong>Learned Tuning</strong>: The model can still choose to make certain features "louder" using parameters called Gamma and Beta.</li>
+            </ul>
+            <p><strong>Run the code</strong> to see how a messy, unstable vector is instantly tamed and re-centered!</p>
+        `
     }
 ];
