@@ -15,8 +15,9 @@ This roadmap outlines the journey from understanding basic matrix math to the co
 
 ## Phase 3: The Attention Mechanism 🧠
 - [ ] **Self-Attention**: The "Big Breakthrough." How words in a sentence "pay attention" to each other.
-- [ ] **Queries, Keys, and Values**: The mathematical mechanism for selective memory.
-- [ ] **Multi-Head Attention**: Learning different types of relationships simultaneously.
+- [x] **Scaled Dot-Product Attention**: The fundamental $Q, K, V$ math and the $\sqrt{d}$ scaling hack.
+- [x] **Multi-Head Attention**: Parallel experts capturing different types of relationships simultaneously.
+- [ ] **Masking**: How the model is prevented from "looking at the future" during training.
 
 ## Phase 4: Transformer Architecture
 - [ ] **Encoder vs Decoder**: The building blocks of translation and generation.

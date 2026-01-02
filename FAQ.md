@@ -137,3 +137,14 @@ In high-dimensional space (large $d$), the Dot Product of two vectors can result
 
 Saturation means that one value becomes nearly 1.0 and all others become nearly 0. When this happens, the gradient (the information the model uses to learn) becomes near-zero, and the model stops being able to train effectively. Dividing by $\sqrt{d}$ keeps the values in a range where the Softmax function is still "sensitive" and able to distribute attention across multiple words.
 
+### **22. Why do we use multiple "Heads" in Attention instead of one large one?**
+
+Language is multi-dimensional. In a single sentence, a word might have a **grammatical** relationship with one word, a **logical** relationship with another, and a **rhyming** relationship with a third.
+
+If we only had one Attention mechanism, the model would have to pick the "strongest" relationship and ignore the others, or blur them together into a messy average. 
+
+**By using Multi-Head Attention:**
+- **Projection**: Instead of just slicing the data, each head uses its own learned weight matrices ($W_Q, W_K, W_V$). This acts as a "filter" that projects the word into a specialized space.
+- **Specialization**: Each head can learn to look for one specific thing (e.g., "Head 1 looks for grammatical subjects," "Head 8 looks for punctuation," "Head 12 looks for emotional context").
+- **Resolution**: Like having multiple cameras recording a scene from different angles, Multi-Head Attention allows the model to "see" overlapping patterns in the data simultaneously, resulting in a much richer context vector.
+

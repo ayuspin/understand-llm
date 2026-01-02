@@ -98,5 +98,18 @@ const STEPS = [
             </ol>
             <p><strong>Run the code</strong> to see how the word "sat" calculates that it should pay 85% of its attention to "cat".</p>
         `
+    },
+    {
+        title: "Step 8: Multi-Head Attention (Parallel Experts)",
+        script: "scripts/step8_multi_head_attention.py",
+        explanation: `
+            <p>In a real LLM, we don't just use one Attention "search." We use many in parallel—this is called <strong>Multi-Head Attention</strong>.</p>
+            <ul style="margin: 16px 0; padding-left: 20px; color: var(--text-secondary);">
+                <li><strong>The Projection</strong>: Instead of just slicing the vector, we use separate weight matrices to "extract" specific information for each head.</li>
+                <li><strong>The Experts</strong>: Each head specializes in a different relationship (e.g., Head 1 looks for nouns, Head 2 looks for actions).</li>
+                <li><strong>The Concat</strong>: We glue all the specialized results back together into one final, context-rich vector.</li>
+            </ul>
+            <p><strong>Run the code</strong> to see how <strong>Head 1</strong> and <strong>Head 2</strong> use their unique weight matrices to focus on completely different parts of the sentence!</p>
+        `
     }
 ];
