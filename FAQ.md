@@ -121,9 +121,19 @@ If we only had one pair, the model would eventually see the same orientation twi
 
 RoPE solves this by having **thousands of pairs** (hands) all rotating at different speeds. Like a **combination lock** with multiple dials, the unique combination of all 6,000+ dial positions will not repeat for trillions of tokens. Even if the "seconds hand" (fast pair) wraps around, the "hour hand" (slow pair) has only moved a fraction of a degree, keeping the absolute position unique.
 
-### **20. Why do we divide the Attention scores by $\sqrt{d}$ (Scaling Factor)?**
 
-In high-dimensional space (large $), the Dot Product of two vectors can result in very large numbers. When these large numbers are fed into the **Softmax** function, it causes the function to "saturate." 
+### **20. What is Self-Attention, and why is it a "Search Engine" for words?**
+
+Self-Attention allows a word to "look around" the sentence and pull in information from other words that are relevant to its meaning. It uses a **Query, Key, and Value** system:
+- **Query (The Search)**: What kind of information am I looking for? (e.g., "I am a verb, looking for my subject").
+- **Key (The Metadata)**: What kind of information do I offer? (e.g., "I am a noun, I can be a subject").
+- **Value (The Content)**: The actual data I carry (e.g., the concept of a "cat").
+
+By matching Queries to Keys using a **Dot Product**, the model builds a custom weight matrix for every sentence, letting words "attend" to their context dynamically.
+
+### **21. Why do we divide the Attention scores by $\sqrt{d}$ (Scaling Factor)?**
+
+In high-dimensional space (large $d$), the Dot Product of two vectors can result in very large numbers. When these large numbers are fed into the **Softmax** function, it causes the function to "saturate." 
 
 Saturation means that one value becomes nearly 1.0 and all others become nearly 0. When this happens, the gradient (the information the model uses to learn) becomes near-zero, and the model stops being able to train effectively. Dividing by $\sqrt{d}$ keeps the values in a range where the Softmax function is still "sensitive" and able to distribute attention across multiple words.
 
