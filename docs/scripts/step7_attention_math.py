@@ -20,10 +20,11 @@ key_dimension = input_matrix.shape[1]  # dimension (4)
 # 2. WEIGHTS: Manually defined for demonstration
 # query_weights: How we transform a word into a "Search Query"
 # key_weights: How we transform a word into a "Search Key" (Label)
-# value_weights: How we transform a word into its "Value" (Content)
-query_weights = np.zeros((4, 4)); query_weights[1, 1] = 1.0
-key_weights = np.zeros((4, 4)); key_weights[1, 1] = 1.0
-value_weights = np.eye(4) # Value just passes through for now
+# value_weights: How we transform a word into its "Value" (Content).
+# We use np.eye(4) which is an "Identity Matrix" (the matrix version of the number 1).
+# This acts as a placeholder that passes the original word data through without 
+# changing its meaning, so we can see the results of the attention blend clearly.
+value_weights = np.eye(4) 
 
 # 3. CALCULATE Queries, Keys, Values
 # Every word gets its own Query, Key, and Value vector
