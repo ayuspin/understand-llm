@@ -13,12 +13,13 @@ input_matrix = np.array([
     [0.0, 1.0, 1.0, 0.0],  # "sat" (features for noun/action)
 ])
 
-# d_k stands for "dimension of the keys".
-# We use this to scale the dot product results.
+# We use the key dimension to scale the dot product results.
 key_dimension = input_matrix.shape[1]  # dimension (4)
 
 # query_weights: How we transform a word into a "Search Query"
-# key_weights: How we transform a word into a "Search Key" (Label)
+# Shape is 4x4 because:
+# - The first 4 must match our input word's 4 features.
+# - The second 4 determines the size of the resulting Query vector.
 query_weights = np.zeros((4, 4)); query_weights[1, 1] = 1.0
 key_weights = np.zeros((4, 4)); key_weights[1, 1] = 1.0
 
@@ -37,6 +38,8 @@ values = input_matrix @ value_weights
 # 4. SCALED DOT-PRODUCT
 # How much does every word Query match every word Key?
 # (3x4) x (4x3) = (3x3) matrix of scores
+# .T stands for Transpose. It flips the matrix sideways so that 
+# the rows and columns align for multiplication.
 scores = queries @ keys.T
 
 # Scaling: divide by the square root of the key_dimension to keep numbers stable
