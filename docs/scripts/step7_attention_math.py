@@ -17,9 +17,11 @@ input_matrix = np.array([
 # We use this to scale the dot product results.
 key_dimension = input_matrix.shape[1]  # dimension (4)
 
-# 2. WEIGHTS: Manually defined for demonstration
 # query_weights: How we transform a word into a "Search Query"
 # key_weights: How we transform a word into a "Search Key" (Label)
+query_weights = np.zeros((4, 4)); query_weights[1, 1] = 1.0
+key_weights = np.zeros((4, 4)); key_weights[1, 1] = 1.0
+
 # value_weights: How we transform a word into its "Value" (Content).
 # We use np.eye(4) which is an "Identity Matrix" (the matrix version of the number 1).
 # This acts as a placeholder that passes the original word data through without 
