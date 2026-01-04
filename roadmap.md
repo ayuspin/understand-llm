@@ -26,10 +26,12 @@ This roadmap outlines the journey from understanding basic matrix math to the co
 ## Phase 5: Transformer Architecture (In Progress 🚀) 🏗️
 - [x] **Transformer Block**: Integrated Attention, MLP, and Residuals into a single runnable pipeline in [text_to_model.py](file:///Users/yuspin/code/understand-llm/text_to_model.py).
 - [x] **Layer Norm**: How models keep their internal activations stable and normalized.
+- [x] **KV Cache**: The optimization that makes inference fast by caching projected Key and Value vectors.
 - [ ] **The Training Loop**: Implementing Cross-Entropy Loss and Gradient Descent for the full block.
 - [ ] **The Decoder Loop**: Moving from training (parallel) to inference (sequential auto-regression).
 
 ## Phase 6: Scaling and Generation
 - [ ] **Temperature and Top-K**: Controlling how "creative" or "random" the model is.
+- [ ] **BPE Tokenization**: How real models split words into subwords for better vocabulary coverage.
 - [ ] **GPU Acceleration**: Moving from NumPy to hardware-optimized math.
 - [ ] **Inference**: Scaling to billions of parameters.

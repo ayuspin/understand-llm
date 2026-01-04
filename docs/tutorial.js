@@ -124,3 +124,38 @@ document.addEventListener('keydown', (e) => {
 // Initialize
 initPyodide();
 loadStep(0);
+
+// ===== RESIZABLE OUTPUT PANEL =====
+const resizer = document.getElementById('resizer');
+const outputSection = document.getElementById('output-section');
+
+let isResizing = false;
+let startY = 0;
+let startHeight = 0;
+
+resizer.addEventListener('mousedown', (e) => {
+    isResizing = true;
+    startY = e.clientY;
+    startHeight = outputSection.offsetHeight;
+    resizer.classList.add('dragging');
+    document.body.style.cursor = 'ns-resize';
+    document.body.style.userSelect = 'none';
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isResizing) return;
+
+    // Calculate new height (dragging up = bigger output)
+    const delta = startY - e.clientY;
+    const newHeight = Math.max(60, Math.min(600, startHeight + delta));
+    outputSection.style.height = newHeight + 'px';
+});
+
+document.addEventListener('mouseup', () => {
+    if (isResizing) {
+        isResizing = false;
+        resizer.classList.remove('dragging');
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+    }
+});

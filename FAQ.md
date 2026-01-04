@@ -171,3 +171,19 @@ As data flows through a deep Transformer, the constant matrix multiplications ca
 - **Mean (The Center)**: The average value of all features in a vector. We subtract the mean to ensure the vector is centered at zero.
 - **Variance (The Spread)**: A measure of how much the values differ from the mean. We divide by the square root of the variance to ensure the "volume" of the signal is consistent (Standard Deviation = 1).
 - **Learnable Recovery**: It uses two parameters—**Gamma** (a multiplier) and **Beta** (a shift)—which allow the model to learn the optimal "volume" for each feature while keeping the overall math stable.
+
+### **26. What is the KV Cache, and why does it make inference fast?**
+
+When generating text, the model works **auto-regressively**: it predicts one word, adds it to the input, and runs the entire model again.
+
+**The Problem**: At word 100, the model would recalculate the Key and Value vectors for all 99 previous words—even though they haven't changed!
+
+**The Solution (KV Cache)**:
+- After processing a word, we **cache** its computed Key ($K$) and Value ($V$) vectors.
+- For the next word, we only calculate K and V for the **new** token.
+- The Query ($Q$) for the new token then looks up the cached K and V vectors from all previous tokens.
+
+**What IS cached**: The projected vectors ($K = X \cdot W_K$, $V = X \cdot W_V$).
+**What is NOT cached**: The Attention Scores themselves—they must be recalculated for every new Query.
+
+**The Benefit**: This turns the time complexity from $O(n^2)$ (recalculating everything) to $O(n)$ (only the new token), making long conversations possible in real-time.

@@ -179,8 +179,10 @@ body {
 .output-section {
     border-top: 1px solid var(--border);
     background: var(--bg-dark);
-    max-height: 200px;
+    height: 200px;
+    min-height: 60px;
     overflow-y: auto;
+    flex-shrink: 0;
 }
 
 .output-header {
@@ -197,6 +199,23 @@ body {
     color: var(--success);
     white-space: pre-wrap;
     min-height: 60px;
+}
+
+/* ===== RESIZER ===== */
+.resizer {
+    height: 6px;
+    background: var(--border);
+    cursor: ns-resize;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+}
+
+.resizer:hover {
+    background: var(--accent);
+}
+
+.resizer.dragging {
+    background: var(--accent);
 }
 
 /* ===== BUTTONS ===== */
