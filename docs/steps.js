@@ -2,49 +2,21 @@
 // Code is dynamically loaded from docs/scripts/*.py files
 const STEPS = [
     {
-        title: "Step 1: The Dot Product",
-        script: "scripts/step1_dot_product.py",
+        title: "Step 1: Matrix Multiplication (x @ W)",
+        script: "scripts/step1_matrix_math.py",
         explanation: `
-            <p>The <strong>Dot Product</strong> is the core building block of all neural network math.</p>
-            <p>It's surprisingly simple: <strong>multiply pairs of numbers together, then add up the results</strong>.</p>
-            <p>In this example, we have two lists:</p>
-            <p><code>list_a = [10, 20]</code> (our input data)</p>
-            <p><code>list_b = [1, 2]</code> (our weights)</p>
-            <p>The calculation is: <code>(10 × 1) + (20 × 2) = 10 + 40 = 50</code></p>
-            <p>This single number tells us how much the input "aligns" with the weights. Higher alignment = higher score.</p>
-            <p><strong>Click "Run" to see it in action! →</strong></p>
-        `
-    },
-    {
-        title: "Step 2: Matrix Multiplication",
-        script: "scripts/step2_matrix_multiply.py",
-        explanation: `
-            <p>A <strong>Matrix</strong> is just a stack of weight vectors.</p>
-            <p>When we multiply a matrix by a vector, we're doing a <strong>dot product for every row</strong>.</p>
-            <p>In AI terminology:</p>
+            <p><strong>The Foundation: Multiplying a Row by a Matrix.</strong></p>
+            <p>We take a horizontal <strong>Row Vector</strong> and multiply it against the columns of a <strong>Matrix</strong>.</p>
             <ul style="margin: 16px 0; padding-left: 20px; color: var(--text-secondary);">
-                <li>Each <strong>row</strong> in the matrix is a "detector" for a specific feature.</li>
-                <li>The result is a new vector of scores—one for each detector.</li>
+                <li><strong>The Input (x)</strong>: A vector of size 3 (e.g., [2, 5, 1]).</li>
+                <li><strong>The Matrix (W)</strong>: A 3x2 grid of numbers.</li>
+                <li><strong>The Operation (Dot Product)</strong>: Matrix multiplication consists of calculating the <strong>Dot Product</strong> between the Row of the first matrix and each Column of the second. This means pairing up the numbers, multiplying them, and adding the results together.</li>
             </ul>
-            <p>This is how neural networks "compare" inputs against learned patterns.</p>
+            <p><strong>Run the code</strong> to see how the single Input Row is used in two separate Dot Product operations (one for each column) to produce the final result.</p>
         `
     },
     {
-        title: "Step 3: The AI Orientation (x × W)",
-        script: "scripts/step3_ai_orientation.py",
-        explanation: `
-            <p>In real AI code, we flip the order: <strong>Input × Weights</strong> instead of Weights × Input.</p>
-            <p>This means:</p>
-            <ul style="margin: 16px 0; padding-left: 20px; color: var(--text-secondary);">
-                <li>Input is a <strong>horizontal row</strong></li>
-                <li>Each <strong>column</strong> in the weight matrix is a word's weights</li>
-            </ul>
-            <p>This is exactly how language models work. They take a hidden state (row) and multiply it against an output matrix where each column represents a different word in the vocabulary.</p>
-            <p>The highest score wins—that's the predicted word!</p>
-        `
-    },
-    {
-        title: "Step 4: Softmax (Probability)",
+        title: "Step 2: Softmax (Probability)",
         script: "scripts/step4_softmax.py",
         explanation: `
             <p>Raw scores (Logits) are hard to compare. <strong>Softmax</strong> turns them into percentages.</p>
@@ -58,7 +30,7 @@ const STEPS = [
         `
     },
     {
-        title: "Step 5: Positional Encoding (Basics)",
+        title: "Step 3: Positional Encoding (Basics)",
         script: "scripts/step5_pos_encoding.py",
         explanation: `
             <p>If you process all words at the same time, the model doesn't know their order. It's "Position Blind."</p>
@@ -72,7 +44,7 @@ const STEPS = [
         `
     },
     {
-        title: "Step 6: RoPE (Modern Rotation)",
+        title: "Step 4: RoPE (Modern Rotation)",
         script: "scripts/step6_rope_math.py",
         explanation: `
             <p>Modern LLMs (Llama, Mistral) use <strong>RoPE</strong> (Rotary Positional Embedding) instead of simple addition.</p>
@@ -86,7 +58,7 @@ const STEPS = [
         `
     },
     {
-        title: "Step 7: Scaled Dot-Product Attention",
+        title: "Step 5: Scaled Dot-Product Attention",
         script: "scripts/step7_attention_math.py",
         explanation: `
             <p>This is the "Heart" of the Transformer. Instead of fixed weights, Attention builds a custom weight matrix for every sentence.</p>
@@ -100,7 +72,7 @@ const STEPS = [
         `
     },
     {
-        title: "Step 8: Multi-Head Attention (Parallel Experts)",
+        title: "Step 6: Multi-Head Attention (Parallel Experts)",
         script: "scripts/step8_multi_head_attention.py",
         explanation: `
             <p>In a real LLM, we don't just use one Attention "search." We use many in parallel—this is called <strong>Multi-Head Attention</strong>.</p>
@@ -113,7 +85,7 @@ const STEPS = [
         `
     },
     {
-        title: "Step 9: Layer Normalization (The Stabilizer)",
+        title: "Step 7: Layer Normalization (The Stabilizer)",
         script: "scripts/step9_layer_norm.py",
         explanation: `
             <p>Deep networks have a problem: as numbers travel through many layers, they can become <strong>explosively large</strong> or <strong>microscopically small</strong>. This makes training impossible.</p>

@@ -3,10 +3,8 @@
 This roadmap outlines the journey from understanding basic matrix math to the complex architecture of modern Transformers like GPT-4.
 
 ## Phase 1: Foundations (Completed ✅)
-- [x] **Vectorization**: Understanding that words are just lists of numbers.
-- [x] **Linear Layers**: Matching inputs against "Weight Vectors" using Dot Products.
+- [x] **Matrix Multiplication (xW)**: Using dot products to run an input row against weight columns.
 - [x] **Non-Linearity (ReLU)**: Why deep networks need mathematical "filters" to learn complex logic.
-- [x] **Universal Function Approximation**: The theory that any complex logic can be represented as math.
 
 ## Phase 2: Sequential & Positional Math (Completed ✅)
 - [x] **Softmax**: Turning raw scores into clean probabilities.

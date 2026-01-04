@@ -2,8 +2,8 @@
 
 This document captures the technical Q&A from our exploration of how Large Language Models (LLMs) work, starting from basic digit recognition.
 
-### **1. How does a computer "recognize" a hand-written digit?**
-It uses a process similar to "Pattern Alignment." For a 16x16 image (256 pixels), the model has a **Weight Matrix** containing **Weight Vectors** for each digit (0-9). Each weight vector is a list of 256 numbers. The computer performs a **Dot Product** between the image's pixels and these vectors. The vector with the highest "match" score identifies the digit.
+### **1. How does matrix multiplication work in AI?**
+It is built on a simple operation called the **Dot Product**. To find the dot product of two vectors, you pair up their corresponding numbers, multiply them, and then add up all the results. In a matrix multiplication (like $xW$), we calculate the dot product of the input **Row** against each **Column** of the weight matrix. Each result represents how much the input aligns with that specific column.
 
 ### **2. Why use this same "pixel/matrix" approach for language?**
 Because computers can only do math on numbers. To treat words like images, we turn them into **Vectors** (lists of numbers). Instead of pixels representing "darkness," these numbers represent abstract **Features** (e.g., how "food-like" or "living" a word is). This allows the computer to use the same dot-product math to find relationships between words.
@@ -63,12 +63,11 @@ Hidden layers allow the model to learn **Hierarchies of Logic**.
 It means **Mathematical Alignment**. Every column in a layer's weight matrix is a numerical **Weight Vector**. When the input vector is multiplied by that vector (a Dot Product), the result is a high score only if the input's numbers "align" with the weight vector's numbers. "Seeing" is simply the computer using math to measure how well the input correlates with its stored patterns.
 
 ### **15. What is the mechanical reality of Matrix Multiplication?**
-It is just a massive series of **Multiplications and Additions**. 
-- In the modern AI orientation ($y = xW$), your input is a horizontal **Row** of numbers.
-- That row gets multiplied against each **Column** of the weight matrix. Each column is one "Weight Vector" for a specific word.
-- For each column: multiply the corresponding elements and add them all up (a **Dot Product**).
-- The results are collected into a new row.
-There is no "magic"—it is simply a structured way to compare an input row of numbers against many different weight vectors (columns) simultaneously.
+It is a structured way to perform multiple **Dot Products** at once. 
+- You take an input **Row** (a vector of numbers).
+- You "slide" that row down each **Column** of the weight matrix.
+- For each column, you multiply the matching elements and add them up.
+This process transforms an input of one size into an output of another size (e.g., turning 3 features into 2 scores).
 
 ### **16. Why does AI code look "backward" compared to math textbooks?**
 In math textbooks, you usually see **$y = Wx$** (Weights on the left, Input as a vertical column). 
@@ -79,14 +78,14 @@ However, in modern AI code (like NumPy and PyTorch), we often use **$y = xW$** (
 
 ### **17. What is Softmax, and why do we need it?**
 
-Softmax is a mathematical function that converts "Logits" (raw, messy scores) into a "Probability Distribution" (clean percentages that add up to 100%).
+Softmax is a mathematical function that converts raw, unrefined scores (Logits) into a "Probability Distribution" (clean percentages that add up to 1.0).
 
 The process has three steps:
-1.  **Exponentiation ($e^x$):** Raise $e$ (2.718...) to the power of each score. This ensures every result is positive and makes large scores significantly larger than small ones.
+1.  **Exponentiation ($e^x$):** Raise $e$ (2.718...) to the power of each score. This ensures every result is positive and amplifies the winners.
 2.  **Summing:** Add up all the exponentiated values to find the "total budget."
 3.  **Normalizing:** Divide each individual value by the total budget.
 
-This is essential because models need a standardized way to compare outputs and decide which word is most likely. It also enables "Temperature" settings and allows the model to distribute "Attention" across multiple words.
+This is essential because models need a standardized way to compare outputs and decide which word is most likely. It also enables "Temperature" settings.
 
 
 ### **18. Why is Positional Encoding a vector and not just a single number?**
